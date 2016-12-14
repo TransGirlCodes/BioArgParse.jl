@@ -13,12 +13,10 @@ using Bio: Seq
             help = "A DNA Sequence"
             required = false
             arg_type = BioSequence{DNAAlphabet{4}}
-            nargs = 1
         "--dna2", "-D"
             help = "A DNA Sequence, stored in 2bit"
             required = false
             arg_type = BioSequence{DNAAlphabet{2}}
-            nargs = 1
     end
 
     runtest(args) = parse_args(args, s)
