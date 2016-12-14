@@ -21,7 +21,7 @@ using Bio: Seq
 
     runtest(args) = parse_args(args, s)
 
-    @test runtest([]) == Dict{AbstractString, Any}(dna1=>nothing, dna2=>nothing)
+    @test runtest([]) == Dict{AbstractString, Any}("dna1"=>nothing, "dna2"=>nothing)
     @test runtest(["--dna1",
                    "atcgatcg",
                    "--dna2",
