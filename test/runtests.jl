@@ -14,19 +14,45 @@ using Bio: Seq
             required = false
             arg_type = BioSequence{DNAAlphabet{4}}
         "--dna2", "-D"
-            help = "A DNA Sequence, stored in 2bit"
+            help = "A DNA Sequence, stored in 2-bit"
             required = false
             arg_type = BioSequence{DNAAlphabet{2}}
+        "--rna1", "-r"
+            help = "An RNA Sequence"
+            required = false
+            arg_type = BioSequence{RNAAlphabet{4}}
+        "--rna2", "-R"
+            help = "An RNA Sequence, stored in 2-bit"
+            required = false
+            arg_type = BioSequence{RNAAlphabet{2}}
     end
 
     runtest(args) = parse_args(args, s)
 
-    @test runtest([]) == Dict{AbstractString, Any}("dna1"=>nothing, "dna2"=>nothing)
+    @test runtest([]) == Dict{AbstractString, Any}("dna1"=>nothing, "dna2"=>nothing, "rna1"=>nothing, "rna2"=>nothing)
+
+    answer1 = Dict{AbstractString, Any}("dna1"=>BioSequence{DNAAlphabet{4}}("atcgatcg"),
+                                        "dna2"=>BioSequence{DNAAlphabet{2}}("aaatttcccggg"),
+                                        "rna1"=>BioSequence{RNAAlphabet{4}}("aucgaucg"),
+                                        "rna2"=>BioSequence{RNAAlphabet{2}}("aaauuucccggg")
+                                       )
     @test runtest(["--dna1",
                    "atcgatcg",
                    "--dna2",
-                   "aaatttcccggg"]) == Dict{AbstractString, Any}("dna1"=>BioSequence{DNAAlphabet{4}}("atcgatcg"),
-                                                                 "dna2"=>BioSequence{DNAAlphabet{2}}("aaatttcccggg"))
+                   "aaatttcccggg",
+                   "--rna1",
+                   "aucgaucg",
+                   "--rna2",
+                   "aaauuucccggg"]) == answer1
+
+    @test runtest(["-d",
+                   "atcgatcg",
+                   "-D",
+                   "aaatttcccggg",
+                   "-r",
+                   "aucgaucg",
+                   "-R",
+                   "aaauuucccggg"]) == answer1
 
 
 end
