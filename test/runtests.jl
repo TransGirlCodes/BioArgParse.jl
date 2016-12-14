@@ -1,6 +1,6 @@
-using Base.Test, BioArgParse
-
 module TestBioArgParse
+
+using Base.Test, BioArgParse
 
 @testset "Parsing sequences" begin
 
