@@ -33,7 +33,7 @@ using Bio: Seq
 
     runtest(args) = parse_args(args, s)
 
-    @test runtest([]) == Dict{AbstractString, Any}("dna1"=>nothing, "dna2"=>nothing, "rna1"=>nothing, "rna2"=>nothing)
+    @test runtest([]) == Dict{AbstractString, Any}("dna1"=>nothing, "dna2"=>nothing, "rna1"=>nothing, "rna2"=>nothing, "prot"=>nothing)
 
     answer1 = Dict{AbstractString, Any}("dna1"=>BioSequence{DNAAlphabet{4}}("atcgatcg"),
                                         "dna2"=>BioSequence{DNAAlphabet{2}}("aaatttcccggg"),
