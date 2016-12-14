@@ -13,6 +13,7 @@ function parse_item{N<:Nucleotide}(::Type{N}, x::AbstractString)
     return convert(N, x[1])
 end
 
+"Parse a string passed in on the command line into a vector of nucleotides."
 function parse_item{N<:Nucleotide}(::Type{Vector{N}}, x::AbstractString)
     return [convert(N, char) for char in x]
 end
