@@ -25,6 +25,10 @@ using Bio: Seq
             help = "An RNA Sequence, stored in 2-bit"
             required = false
             arg_type = BioSequence{RNAAlphabet{2}}
+        "--prot", "-P"
+            help = "An amino acid sequence"
+            required = false
+            arg_type = BioSequence{AminoAcidAlphabet}
     end
 
     runtest(args) = parse_args(args, s)
@@ -34,7 +38,8 @@ using Bio: Seq
     answer1 = Dict{AbstractString, Any}("dna1"=>BioSequence{DNAAlphabet{4}}("atcgatcg"),
                                         "dna2"=>BioSequence{DNAAlphabet{2}}("aaatttcccggg"),
                                         "rna1"=>BioSequence{RNAAlphabet{4}}("aucgaucg"),
-                                        "rna2"=>BioSequence{RNAAlphabet{2}}("aaauuucccggg")
+                                        "rna2"=>BioSequence{RNAAlphabet{2}}("aaauuucccggg"),
+                                        "prot"=>BioSequence{AminoAcidAlphabet}("andeqhm")
                                        )
     @test runtest(["--dna1",
                    "atcgatcg",
@@ -43,7 +48,9 @@ using Bio: Seq
                    "--rna1",
                    "aucgaucg",
                    "--rna2",
-                   "aaauuucccggg"]) == answer1
+                   "aaauuucccggg",
+                   "--prot",
+                   "andeqhm"]) == answer1
 
     @test runtest(["-d",
                    "atcgatcg",
@@ -52,7 +59,9 @@ using Bio: Seq
                    "-r",
                    "aucgaucg",
                    "-R",
-                   "aaauuucccggg"]) == answer1
+                   "aaauuucccggg",
+                   "-P",
+                   "andeqhm"]) == answer1
 
 
 end
