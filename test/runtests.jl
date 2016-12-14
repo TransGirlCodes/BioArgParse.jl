@@ -26,8 +26,8 @@ using Base.Test, BioArgParse, ArgParse, Bio: Seq
     @test runtest(["--dna1",
                    "atcgatcg",
                    "--dna2",
-                   "aaatttcccggg"]) == Dict{AbstractString, Any}(dna1=>BioSequence{DNAAlphabet{4}}("atcgatcg"),
-                                                                 dna2=>BioSequence{DNAAlphabet{2}}("aaatttcccggg"))
+                   "aaatttcccggg"]) == Dict{AbstractString, Any}("dna1"=>BioSequence{DNAAlphabet{4}}("atcgatcg"),
+                                                                 "dna2"=>BioSequence{DNAAlphabet{2}}("aaatttcccggg"))
 
 
 end
