@@ -19,5 +19,4 @@ function parse_item{N<:Nucleotide}(::Type{Vector{N}}, x::AbstractString)
 end
 
 
-
 end

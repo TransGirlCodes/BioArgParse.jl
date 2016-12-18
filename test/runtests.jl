@@ -29,6 +29,10 @@ using Bio: Seq
             help = "An amino acid sequence"
             required = false
             arg_type = BioSequence{AminoAcidAlphabet}
+        "--nuc", "-n"
+            help = "A DNA nucleotide"
+            required = false
+            arg_type = DNANucleotide
     end
 
     runtest(args) = parse_args(args, s)
@@ -39,7 +43,8 @@ using Bio: Seq
                                         "dna2"=>BioSequence{DNAAlphabet{2}}("aaatttcccggg"),
                                         "rna1"=>BioSequence{RNAAlphabet{4}}("aucgaucg"),
                                         "rna2"=>BioSequence{RNAAlphabet{2}}("aaauuucccggg"),
-                                        "prot"=>BioSequence{AminoAcidAlphabet}("andeqhm")
+                                        "prot"=>BioSequence{AminoAcidAlphabet}("andeqhm"),
+                                        "nuc"=>DNA_A
                                        )
     @test runtest(["--dna1",
                    "atcgatcg",
@@ -50,7 +55,9 @@ using Bio: Seq
                    "--rna2",
                    "aaauuucccggg",
                    "--prot",
-                   "andeqhm"]) == answer1
+                   "andeqhm",
+                   "nuc",
+                   "A"]) == answer1
 
     @test runtest(["-d",
                    "atcgatcg",
@@ -61,7 +68,9 @@ using Bio: Seq
                    "-R",
                    "aaauuucccggg",
                    "-P",
-                   "andeqhm"]) == answer1
+                   "andeqhm",
+                   "-n",
+                   "a"]) == answer1
 
 
 end
